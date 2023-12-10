@@ -12,9 +12,19 @@ def take_command():
     with sr.Microphone() as source:
         say('Listening')
         print('Listening')
+        r.pause_threshold = 1
         audio = r.listen(source)
-        query = r.recognize_google(audio, language= 'en-in')
-        print(f'User said: {query}')
-        return query
-command = take_command()
-say(command)
+        try:
+            query = r.recognize_google(audio, language= 'en-in')
+            print(f'User said: {query}')
+            return query
+        except Exception as e:
+            return 'Some Error Occured. Sorry from Jarvis'
+while True:
+    print('Listening')
+    say('Listening')
+    query = take_command()
+    say(query)
+    if  'Open Youtube'.lower() in query.lower():
+        webbrowser.open('https://youtube.com')
+        say('Opening youtube')
