@@ -1,6 +1,8 @@
 import win32com.client
 import speech_recognition as sr
 import webbrowser
+import openai
+import datetime
 def say(script):
     '''This fucntion says out loud whatever string is given to it'''
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
@@ -11,9 +13,10 @@ def take_command():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.pause_threshold = 0.5
+        r.energy_threshold = 300
         audio = r.listen(source)
         try:
-            print('Recognizing')
+            say('Recognizing')
             query = r.recognize_google(audio, language= 'en-in')
             print(f'User said: {query}')
             return query
@@ -24,8 +27,7 @@ while True:
     say('Listening')
     query = take_command()
     say('Command accepted')
-    say(query)
-    sites = [['youtube','https://www.youtube.com'],['wikipedia','https://www.wikipedia.com'],['google','https://www.google.com'],['quora','https://www.quora.com'],['facebook','https://www.facebook.com'],['Github','https://www.github.com'],['Reddit','https://www.reddit.com'],['Discord','https://www.discord.com'],['Instagram','https://www.instagram.com'],['Netflix','https://www.Netflix.com'],['Spotify','https://www.Spotify.com']]
+    sites = [['youtube','https://www.youtube.com'],['wikipedia','https://www.wikipedia.com'],['google','https://www.google.com'],['quora','https://www.quora.com'],['facebook','https://www.facebook.com'],['Github','https://www.github.com'],['Reddit','https://www.reddit.com'],['Discord','https://www.discord.com'],['Instagram','https://www.instagram.com'],['Netflix','https://www.Netflix.com'],['Spotify','https://www.spotify.com']]
     for site in sites:
         if  f'Open {site[0]}'.lower() in query.lower():
             say(f'Opening {site[0]}')
@@ -33,3 +35,6 @@ while True:
     if 'stop'.lower() in query.lower():
         say('Okay Sir,Jarvis is turning off')
         quit()
+    if 'the time'.lower() in query.lower():
+        Time = datetime.datetime.now().strftime('%H:%M:%S')
+        say(f'Sir,the time is {Time}')
