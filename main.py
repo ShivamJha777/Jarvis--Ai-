@@ -79,7 +79,7 @@ while True:
     print('Listening')
     say('Listening')
     query = take_command().lower()
-    say('Command accepted')
+    say('Command Accepted')
     if 'stop'.lower() in query or 'shutdown'.lower() in query or 'shut down'.lower() in query  or 'shut '.lower() in query:
         say('Okay Boss,Jarvis is turning off')
         quit()

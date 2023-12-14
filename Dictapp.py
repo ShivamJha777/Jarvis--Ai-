@@ -7,7 +7,7 @@ def say(script):
     '''This function says out loud whatever string is given to it'''
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
     return speaker.Speak(script)
-dictapp = {'commandprompt':'cmd','paint':'paint','word':'winword',"excel":'excel',"chrome":'chrome','vscode':'code','powerpoint':'powerpnt','brave':'brave','pycharm':'pycharm'}
+dictapp = {'commandprompt':'cmd','paint':'paint','word':'winword',"excel":'excel',"chrome":'chrome','vscode':'code','powerpoint':'powerpnt','brave':'brave','pycharm':'pycharm','Whatsapp':'Whatsapp','webstorm':'webstorm'}
 def openappweb(query):
     say('Launching ,Sir')
     if '.com' in query or 'co.in'in query or '.org' in query:
