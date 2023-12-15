@@ -111,8 +111,5 @@ while True:
         data = BeautifulSoup(r.text,'html.parser')
         temp = getattr(data.find('div', class_ = "BNeawe"), 'text', None)
         say(f'Boss the current {search} is {temp}')
-    elif 'go to sleep' in query:
-        say('Okay Boss.Going to sleep.')
-        break
     elif 'Hello'.lower() or 'how are you'.lower() in query:
         say('Hi Boss,I am fine,how are you doing?')
