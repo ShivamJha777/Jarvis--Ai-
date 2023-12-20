@@ -102,21 +102,35 @@ while True:
         pyautogui.press('m')
         say('Done Boss,The video has been unmuted')
     elif 'increase the volume' in query:
-        say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.')
-        increase_percentage = int(take_command())
-        if increase_percentage % 2 != 0:
-            while increase_percentage % 2 != 0:
-                increase_percentage += 0.1
-        say('Okay Boss,Turning up the volume')
-        volumeup(increase_percentage)
+        say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.Only say the percentage value')
+        try:
+            increase_percentage = take_command()
+            increase_percentage = increase_percentage.replace('percent','')
+            increase_percentage = increase_percentage.replace('percentage', '')
+            increase_percentage = increase_percentage.replace('%','')
+            increase_percentage = int(increase_percentage)
+            if increase_percentage % 2 != 0:
+                while increase_percentage % 2 != 0:
+                    increase_percentage += 0.1
+            say('Okay Boss,Turning up the volume')
+            volumeup(increase_percentage)
+        except:
+            say('Sorry Boss ,Some error occurred Please try again')
     elif 'decrease the volume' in query:
         say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.')
-        decrease_percentage = int(take_command())
-        if decrease_percentage % 2 != 0:
-            while decrease_percentage % 2 != 0:
-                decrease_percentage += 0.1
-        say('Okay Boss Turning down the volume')
-        volumedown(decrease_percentage)
+        try:
+            decrease_percentage = take_command()
+            decrease_percentage = decrease_percentage.replace('percent', '')
+            decrease_percentage = decrease_percentage.replace('percentage', '')
+            decrease_percentage = decrease_percentage.replace('%', '')
+            decrease_percentage = int(decrease_percentage)
+            if decrease_percentage % 2 != 0:
+                while decrease_percentage % 2 != 0:
+                    decrease_percentage += 1
+            say('Okay Boss Turning down the volume')
+            volumedown(decrease_percentage)
+        except:
+            say('Sorry Boss,Some error occurred please try again')
     elif 'I am fine'.lower() in query:
         say('That is great Boss')
     elif 'Thank you'.lower() in query:
