@@ -1,4 +1,3 @@
-import os
 import pywhatkit
 import webbrowser
 import requests
@@ -7,6 +6,8 @@ import win32com.client
 import speech_recognition as sr
 import wikipedia
 import datetime
+import pyautogui
+from keyboard import volumeup , volumedown
 def say(script):
     '''This function says out loud whatever string is given to it'''
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
@@ -16,7 +17,7 @@ def take_command():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.pause_threshold = 0.7
-        r.energy_threshold = 450
+        r.energy_threshold = 500
         audio = r.listen(source)
         try:
             say('Recognizing')
@@ -84,28 +85,67 @@ while True:
         Time = datetime.datetime.now().strftime('%H:%M:%S')
         say(f'Boss,the time is {Time}')
     elif 'introduce yourself'.lower() in query:
-        say('I am a virtual voice assistant developed by Mr Shivam Jha and Mr Ishan Tiwari from 10 december 2023 uptill 2024 ,I can help you with almost anything,I can help you with your school work,I can even quiz you,I am capable of face and object recognition,I can tell you the news,predict the weather and do almost everything models like Siri or Chat Gpt can do')
+        say('I am a virtual voice assistant developed by Mr Shivam Jha and Mr Ishan Tiwari from 10 december 2023 uptill 2024,My Name stands for Just A RATHER VERY INTELLIGNET SYSTEM,I can help you with almost anything,I can help you with your school work,I can even quiz you,I am capable of face and object recognition,I can tell you the news,predict the weather and do almost everything models like Siri or Chat Gpt can do')
     elif 'go offline' in query or 'shut off' in query or 'shutdown' in query  or 'shut down' in query:
         say('Okay Boss.Jarvis is going offline')
         quit()
+    elif 'Pause'.lower() in query:
+        pyautogui.press('k')
+        say('Done,Boss.The video has been Paused')
+    elif 'Play'.lower() in query:
+        pyautogui.press('k')
+        say('Done,Boss.The video has been Played')
+    elif 'mute'.lower() in query:
+        pyautogui.press('m')
+        say('Done Boss,The video has been muted')
+    elif 'unmute'.lower() in query:
+        pyautogui.press('m')
+        say('Done Boss,The video has been unmuted')
+    elif 'increase the volume' in query:
+        say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.')
+        increase_percentage = int(take_command())
+        if increase_percentage % 2 != 0:
+            while increase_percentage % 2 != 0:
+                increase_percentage += 0.1
+        say('Okay Boss,Turning up the volume')
+        volumeup(increase_percentage)
+    elif 'decrease the volume' in query:
+        say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.')
+        decrease_percentage = int(take_command())
+        if decrease_percentage % 2 != 0:
+            while decrease_percentage % 2 != 0:
+                decrease_percentage += 0.1
+        say('Okay Boss Turning down the volume')
+        volumedown(decrease_percentage)
     elif 'I am fine'.lower() in query:
         say('That is great Boss')
     elif 'Thank you'.lower() in query:
         say('You are welcome ,Boss')
     elif 'open' in query:
+        say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.')
+        increase_percentage = take_command()
         from Dictapp import openappweb
         openappweb(query)
     elif 'close' in query:
         from Dictapp import closeappweb
         closeappweb(query)
-    elif 'Search Google'.lower() in query:
+    elif 'remember' in query:
+        say('Boss What would you like me to remember')
+        remember = take_command()
+    elif 'Google'.lower() in query:
         Search_Google(query)
-    elif 'Search Youtube'.lower() in query:
+    elif 'Youtube'.lower() in query:
         Search_Youtube(query)
-    elif 'Search Wikipedia'.lower() in query:
+    elif 'Wikipedia'.lower() in query:
         Search_Wikipedia(query)
+    elif 'tell me what I told you to remeber' or 'What do you remember' or 'What did I tell you to remember' in query:
+        say(f'Boss,You told me to remember that {remember}')
     elif 'temperature'.lower() in query:
         search = 'temperature in Kolkata'
+        if 'in' in query:
+            query = query.replace('what is the','')
+            query = query.replace('jarvis','')
+            search = query
         url = f'https://search.google.com/search?q={search}'
         r = requests.get(url)
         data = BeautifulSoup(r.text,'html.parser')
@@ -113,3 +153,6 @@ while True:
         say(f'Boss the current {search} is {temp}')
     elif 'Hello'.lower() or 'how are you'.lower() in query:
         say('Hi Boss,I am fine,how are you doing?')
+    else:
+        say('Sorry Boss,I could not understand what you just said')
+
