@@ -129,17 +129,17 @@ while True:
     elif 'close' in query:
         from Dictapp import closeappweb
         closeappweb(query)
-    elif 'remember' in query:
+    elif 'remember that' in query:
         say('Boss What would you like me to remember')
         remember = take_command()
+    elif 'tell me what I told you to remember' or 'What do you remember' or 'What did I tell you to remember' in query:
+        say(f'Boss,You told me to remember that {remember}')
     elif 'Google'.lower() in query:
         Search_Google(query)
     elif 'Youtube'.lower() in query:
         Search_Youtube(query)
     elif 'Wikipedia'.lower() in query:
         Search_Wikipedia(query)
-    elif 'tell me what I told you to remeber' or 'What do you remember' or 'What did I tell you to remember' in query:
-        say(f'Boss,You told me to remember that {remember}')
     elif 'temperature'.lower() in query:
         search = 'temperature in Kolkata'
         if 'in' in query:
