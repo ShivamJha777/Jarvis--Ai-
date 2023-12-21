@@ -8,6 +8,7 @@ import wikipedia
 import datetime
 import pyautogui
 from keyboard import volumeup , volumedown
+import random
 def say(script):
     '''This function says out loud whatever string is given to it'''
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
@@ -77,6 +78,8 @@ def Search_Wikipedia(query):
     except:
         say(f'I am sorry,Boss Either I heard you wrong or there was no information for {query} on wikipedia')
 Greet_Me()
+information = False
+remember = ''
 while True:
     say('Listening')
     print('Listening')
@@ -85,7 +88,7 @@ while True:
         Time = datetime.datetime.now().strftime('%H:%M:%S')
         say(f'Boss,the time is {Time}')
     elif 'introduce yourself'.lower() in query:
-        say('I am a virtual voice assistant developed by Mr Shivam Jha and Mr Ishan Tiwari from 10 december 2023 uptill 2024,My Name stands for Just A RATHER VERY INTELLIGNET SYSTEM,I can help you with almost anything,I can help you with your school work,I can even quiz you,I am capable of face and object recognition,I can tell you the news,predict the weather and do almost everything models like Siri or Chat Gpt can do')
+        say('I am a virtual voice assistant developed by Mr Shivam Jha and Mr Ishan Tiwari from 10 december 2023 uptill 2024,My Name stands for Just A RATHER VERY INTELLIGENT SYSTEM,I can help you with almost anything,I can help you with your school work,I can even quiz you,I am capable of face and object recognition,I can tell you the news,predict the weather and do almost everything models like Siri or Chat Gpt can do')
     elif 'go offline' in query or 'shut off' in query or 'shutdown' in query  or 'shut down' in query:
         say('Okay Boss.Jarvis is going offline')
         quit()
@@ -133,21 +136,38 @@ while True:
             say('Sorry Boss,Some error occurred please try again')
     elif 'I am fine'.lower() in query:
         say('That is great Boss')
+    elif 'tired' or 'cheer' in query:
+        say('Okay Boss Playing some songs to cheer you up')
+        b = random.randint(1,10)
+        if b == 1 :
+            webbrowser.open('https://www.youtube.com/watch?v=kagoEGKHZvU')
+        elif b == 2:
+            webbrowser.open('https://www.youtube.com/watch?v=623JGFAYZ3w')
+        elif b == 3:
+            webbrowser.open('https://www.youtube.com/watch?v=dawrQnvwMTY')
+        elif b == 4:
+            webbrowser.open('https://www.youtube.com/watch?v=2QdPxdcMhFQ')
+        elif b == 5:
+            webbrowser.open('https://www.youtube.com/watch?v=rgGDTO8g2Pg&t=4973s')
+        elif b == 6:
+            webbrowser.open('https://www.youtube.com/watch?v=7aMOurgDB-o')
+        elif b == 7:
+            webbrowser.open('https://www.youtube.com/watch?v=fWRPihlt2ho')
+        elif b == 8:
+            webbrowser.open('https://www.youtube.com/watch?v=MENcEyD0B7w')
+        elif b == 9:
+            webbrowser.open('https://www.youtube.com/watch?v=ajIqCULzFJA')
+        elif b == 10:
+            webbrowser.open('https://www.youtube.com/watch?v=gjkNwuPcl50')
     elif 'Thank you'.lower() in query:
         say('You are welcome ,Boss')
     elif 'open' in query:
-        say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.')
         increase_percentage = take_command()
         from Dictapp import openappweb
         openappweb(query)
     elif 'close' in query:
         from Dictapp import closeappweb
         closeappweb(query)
-    elif 'remember that' in query:
-        say('Boss What would you like me to remember')
-        remember = take_command()
-    elif 'tell me what I told you to remember' or 'What do you remember' or 'What did I tell you to remember' in query:
-        say(f'Boss,You told me to remember that {remember}')
     elif 'Google'.lower() in query:
         Search_Google(query)
     elif 'Youtube'.lower() in query:
@@ -165,8 +185,17 @@ while True:
         data = BeautifulSoup(r.text,'html.parser')
         temp = getattr(data.find('div', class_ = "BNeawe"), 'text', None)
         say(f'Boss the current {search} is {temp}')
+    elif 'remember that' in query:
+        query = query.replace('jarvis','')
+        query = query.replace('i want you to', '')
+        query = query.replace('remember that', '')
+        query = query.replace('i', 'you')
+        remember += query
+        say(f'OKay Boss,I wil remember {remember}')
+    elif 'What do you remember' in query:
+        say(f'Boss,You told me to remember that {remember}')
+    elif 'forget' in query:
+        say('Okay Boss I am Going to forget whatever you told me')
+        remember = ''
     elif 'Hello'.lower() or 'how are you'.lower() in query:
-        say('Hi Boss,I am fine,how are you doing?')
-    else:
         say('Sorry Boss,I could not understand what you just said')
-
