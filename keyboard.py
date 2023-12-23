@@ -25,4 +25,4 @@ def volumedown(percentage):
             keyboard.release(Key.media_volume_down)
             sleep(0.1)
     except:
-        say('Sorry Boss,Some error occured,Please try again')
+        say('Sorry Boss,Some error occurred,Please try again')

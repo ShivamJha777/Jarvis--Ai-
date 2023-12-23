@@ -194,6 +194,8 @@ while True:
                 Search_Youtube(query)
             elif 'Wikipedia'.lower() in query:
                 Search_Wikipedia(query)
+            elif 'news' in query:
+                from NewsRead import latestenews
             elif 'sleep' in query:
                 say('Okay Boss,Going to sleep')
                 break
@@ -214,7 +216,6 @@ while True:
                 query = query.replace('how the weather in', '')
                 query = query.replace('is', '')
                 The_city = query
-
                 find_weather(The_city)
             elif 'remember that' in query:
                 query = query.replace('jarvis','')
