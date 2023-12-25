@@ -76,7 +76,6 @@ def Search_Wikipedia(query):
         print(results)
     except:
         say(f'I am sorry,Boss Either I heard you wrong or there was no information for {query} on wikipedia')
-information = False
 remember = ''
 while True:
     say('Listening')
