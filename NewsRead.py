@@ -52,4 +52,4 @@ def latestenews(API_KEY):
         choice = take_command()
         if 'stop' in choice:
             break
-    say('That is all Boss')
+    say('That is all,Boss')

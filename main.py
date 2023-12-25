@@ -1,3 +1,5 @@
+import os
+
 import pywhatkit
 import webbrowser
 import win32com.client
@@ -26,6 +28,11 @@ def take_command():
             return query
         except Exception as e:
             return 'Some Error Occurred. Sorry from Jarvis'
+def alarm(query):
+    timehere = open('Alarmtext.txt')
+    timehere.write(query)
+    timehere.close()
+    os.startfile('alarm.py')
 def Greet_Me():
     '''This function greets the user'''
     hour = int(datetime.datetime.now().hour)
@@ -106,7 +113,7 @@ while True:
                 say('Done Boss,The video has been muted')
             elif 'unmute'.lower() in query:
                 pyautogui.press('m')
-                say('Done Boss,The video has been unmuted')
+                say('Done Boss,The video has been un-muted')
             elif 'increase the volume' in query:
                 say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.Only say the percentage value')
                 try:
@@ -123,7 +130,7 @@ while True:
                 except:
                     say('Sorry Boss ,Some error occurred Please try again')
             elif 'decrease the volume' in query:
-                say('Boss how much percentage would you like the volume to be increase by?Please tell a even number.')
+                say('Boss how much percentage would you like the volume to be decrease by?Please tell a even number.')
                 try:
                     decrease_percentage = take_command()
                     decrease_percentage = decrease_percentage.replace('percent', '')
@@ -228,5 +235,11 @@ while True:
             elif 'forget' in query:
                 say('Okay Boss I am Going to forget whatever you told me')
                 remember = ''
+            elif 'set an alarm' in query:
+                say('Sorry Boss ,Due to some issues you will have to manually type down the alarm time')
+                print('If you have to set an alarm for 12:23:34 you will have to enter 12 and 23 and 34')
+                a = input('Tell the time in the format given above')
+                alarm(a)
+                say('Done,Boss')
             elif 'Hello'.lower() or 'how are you'.lower() in query:
                 say('Sorry Boss,I could not understand what you just said')

@@ -34,4 +34,3 @@ def Temperature_finder(Query):
     temp = getattr(soup.find('div', attrs={'class': 'BNeawe iBp4i AP7Wnd'}), 'text', None)
     print(f'Boss the {Query} is {temp}')
     say(f'Boss the {Query} is {temp}')
-find_weather('mumbai')
