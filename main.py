@@ -1,4 +1,4 @@
-import os
+
 import pywhatkit
 import webbrowser
 import win32com.client
@@ -27,11 +27,6 @@ def take_command():
             return query
         except Exception as e:
             return 'Some Error Occurred. Sorry from Jarvis'
-def alarm(query):
-    timehere = open('Alarmtext.txt')
-    timehere.write(query)
-    timehere.close()
-    os.startfile('alarm.py')
 def Greet_Me():
     '''This function greets the user'''
     hour = int(datetime.datetime.now().hour)
@@ -201,6 +196,7 @@ while True:
                 Search_Wikipedia(query)
             elif 'news' in query:
                 from NewsRead import latestenews
+                latestenews()
             elif 'sleep' in query:
                 say('Okay Boss,Going to sleep')
                 break
@@ -235,11 +231,10 @@ while True:
                 say('Okay Boss I am Going to forget whatever you told me')
                 remember = ''
             elif 'set an alarm' in query:
-                say('Sorry Boss ,Due to some issues you will have to manually type down the alarm time')
-                print('If you have to set an alarm for 12:23:34 you will have to enter 12 and 23 and 34')
-                a = input('Tell the time in the format given above')
-                alarm(a)
-                say('Done,Boss')
-                say('Yes,Ishan is  good boy')
+                say('Sorry Boss,due to some errors you will have to manually write down the alarm time.')
+                time = input('Please give the alarm time in "HH:MM AM/PM" format:')
+                from alarm import alarm_setter
+                say('Okay Boss setting an alarm.')
+                alarm_setter(time)
             elif 'Hello'.lower() or 'how are you'.lower() in query:
                 say('Sorry Boss,I could not understand what you just said')

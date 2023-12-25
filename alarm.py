@@ -1,30 +1,21 @@
-import win32com.client
-import datetime
 import os
+import win32com
+import datetime
+from time import sleep
 def say(script):
     '''This function says out loud whatever string is given to it'''
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
     return speaker.Speak(script)
-extractedtime = open('Alarmtext.txt','rt')
-time = extractedtime.read()
-Time = str(time)
-extractedtime.close()
-
-deletetime = open('Alarmtext.txt','r+')
-deletetime.truncate(0)
-deletetime.close()
-def ring(time):
-    timeset = str(time)
-    timenow = timeset.replace('jarvis','')
-    timenow = timenow.replace('set an alarm','')
-    timenow = timenow.replace(' and ', ':')
-    Alarmtime = str(timenow)
-    print(Alarmtime)
+def alarm_setter(alarm_time):
+    alarm_hour = alarm_time[0:2]
+    alarm_min = alarm_time[3:5]
     while True:
-        currenttime = datetime.datetime.now().strftime('%H:%M:%S')
-        if currenttime == Alarmtime:
-            say('Alarm Ringing,Boss')
-            os.startfile('A.mp3')
-        elif currenttime + '00:00:30' == Alarmtime:
-            exit()
-    ring(time)
+        now = datetime.datetime.now()
+        current_hour = now.strftime("%H")
+        current_min = now.strftime("%M")
+        if alarm_hour == current_hour:
+            if alarm_min == current_min:
+                    say('Boss,The alarm is ringing')
+                    os.startfile('carol_of_the_bells-alarm.wav')
+                    sleep(30)
+                    break
