@@ -1,5 +1,4 @@
 import os
-
 import pywhatkit
 import webbrowser
 import win32com.client
@@ -98,7 +97,7 @@ while True:
                 Time = datetime.datetime.now().strftime('%H:%M:%S')
                 say(f'Boss,the time is {Time}')
             elif 'introduce yourself'.lower() in query:
-                say('I am a virtual voice assistant developed by Mr Shivam Jha and Mr Ishan Tiwari from 10 december 2023 uptill 2024,My Name stands for Just A RATHER VERY INTELLIGENT SYSTEM,I can help you with almost anything,I can help you with your school work,I can even quiz you,I am capable of face and object recognition,I can tell you the news,predict the weather and do almost everything models like Siri or Chat Gpt can do')
+                say('I am a virtual voice assistant developed by Mr Shivam Jha and Mr Ishan Tekwari from 10 december 2023 uptill 2024,My Name stands for Just A RATHER VERY INTELLIGENT SYSTEM,I can help you with almost anything,I can help you with your school work,I can even quiz you,I am capable of face and object recognition,I can tell you the news,predict the weather and do almost everything models like Siri or Chat Gpt can do')
             elif 'go offline' in query or 'shut off' in query or 'shutdown' in query  or 'shut down' in query:
                 say('Okay Boss.Jarvis is going offline')
                 quit()
