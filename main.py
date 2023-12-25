@@ -197,6 +197,12 @@ while True:
             elif 'news' in query:
                 from NewsRead import latestenews
                 latestenews()
+            elif 'calculation' in query:
+                from Calculator import calculator
+                calculator()
+            elif 'calculate' in query:
+                from Calculator import calculator
+                calculator()
             elif 'sleep' in query:
                 say('Okay Boss,Going to sleep')
                 break
