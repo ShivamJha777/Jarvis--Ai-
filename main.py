@@ -241,5 +241,6 @@ while True:
                 a = input('Tell the time in the format given above')
                 alarm(a)
                 say('Done,Boss')
+                say('Yes,Ishan is  good boy')
             elif 'Hello'.lower() or 'how are you'.lower() in query:
                 say('Sorry Boss,I could not understand what you just said')
