@@ -185,7 +185,6 @@ while True:
             elif 'Thank you'.lower() in query:
                 say('You are welcome ,Boss')
             elif 'open' in query:
-                increase_percentage = take_command()
                 from Dictapp import openappweb
                 openappweb(query)
             elif 'close' in query:
