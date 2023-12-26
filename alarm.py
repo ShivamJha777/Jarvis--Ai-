@@ -1,12 +1,19 @@
 import os
-import win32com
+import win32com.client
 import datetime
 from time import sleep
+
+f = open('Alarmtext.txt', 'r')
+Time = f.readline()
+time = str(Time)
+f.close()
+
+
 def say(script):
     '''This function says out loud whatever string is given to it'''
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
     return speaker.Speak(script)
-def alarm_setter(alarm_time):
+def ring(alarm_time):
     alarm_hour = alarm_time[0:2]
     alarm_min = alarm_time[3:5]
     while True:
@@ -19,3 +26,4 @@ def alarm_setter(alarm_time):
                     os.startfile('carol_of_the_bells-alarm.wav')
                     sleep(30)
                     break
+ring(time)

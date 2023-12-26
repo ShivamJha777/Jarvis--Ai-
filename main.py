@@ -1,4 +1,4 @@
-
+import os
 import pywhatkit
 import webbrowser
 import win32com.client
@@ -27,6 +27,10 @@ def take_command():
             return query
         except Exception as e:
             return 'Some Error Occurred. Sorry from Jarvis'
+def alarm(Time):
+    with open('Alarmtext.txt', 'w') as output:
+        output.write(Time)
+        output.close()
 def Greet_Me():
     '''This function greets the user'''
     hour = int(datetime.datetime.now().hour)
@@ -238,9 +242,9 @@ while True:
                 remember = ''
             elif 'set an alarm' in query:
                 say('Sorry Boss,due to some errors you will have to manually write down the alarm time.')
-                time = input('Please give the alarm time in "HH:MM AM/PM" format:')
-                from alarm import alarm_setter
-                say('Okay Boss setting an alarm.')
-                alarm_setter(time)
+                a = input('Please give the alarm time in "HH:MM AM/PM" format:')
+                say('Okay Boss setting an alarm')
+                alarm(a)
+                exec(open('alarm.py').read())
             elif 'Hello'.lower() or 'how are you'.lower() in query:
                 say('Sorry Boss,I could not understand what you just said')
