@@ -1,4 +1,3 @@
-import os
 import pywhatkit
 import webbrowser
 import win32com.client
@@ -246,5 +245,9 @@ while True:
                 say('Okay Boss setting an alarm')
                 alarm(a)
                 exec(open('alarm.py').read())
+            elif 'Ishan' in query:
+                say('Ishan is the one who made me')  
+            elif 'Shivam' in query:
+                say('He is also the one who made me')
             elif 'Hello'.lower() or 'how are you'.lower() in query:
                 say('Sorry Boss,I could not understand what you just said')
