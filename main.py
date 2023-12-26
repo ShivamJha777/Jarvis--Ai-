@@ -241,6 +241,10 @@ while True:
                 time = input('Please give the alarm time in "HH:MM AM/PM" format:')
                 from alarm import alarm_setter
                 say('Okay Boss setting an alarm.')
-                alarm_setter(time)    
+                alarm_setter(time)
+            elif 'Ishan' in query:
+                say('Ishan is the one who made me')  
+            elif 'Shivam' in query:
+                say('He is also the one who made me')          
             elif 'Hello'.lower() or 'how are you'.lower() in query:
                 say('Sorry Boss,I could not understand what you just said')
