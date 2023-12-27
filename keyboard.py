@@ -7,9 +7,8 @@ def say(script):
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
     return speaker.Speak(script)
 def volumeup(percentage):
-    number_of_times = percentage/2
+    number_of_times = percentage//2
     try:
-        number_of_times = int(number_of_times)
         for i in range(number_of_times):
             keyboard.press(Key.media_volume_up)
             keyboard.release(Key.media_volume_up)
