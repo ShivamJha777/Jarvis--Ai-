@@ -23,13 +23,9 @@ def take_command():
             say('Recognizing')
             query = r.recognize_google(audio, language= 'en-in')
             print(f'User said: {query}\n')
-            return query
+            return query.lower()
         except Exception as e:
             return 'Some Error Occurred. Sorry from Jarvis'
-def alarm(Time):
-    with open('Alarmtext.txt', 'w') as output:
-        output.write(Time)
-        output.close()
 def Greet_Me():
     '''This function greets the user'''
     hour = int(datetime.datetime.now().hour)
@@ -141,6 +137,9 @@ while True:
                     volumedown(decrease_percentage)
                 except:
                     say('Sorry Boss,Some error occurred please try again')
+            elif 'whatsapp' in query:
+                from whatsapp import sendMessage
+                sendMessage()
             elif 'I am fine'.lower() in query:
                 say('That is great Boss')
             elif 'tired' in  query:
@@ -240,10 +239,10 @@ while True:
                 remember = ''
             elif 'set an alarm' in query:
                 say('Sorry Boss,due to some errors you will have to manually write down the alarm time.')
-                a = input('Please give the alarm time in "HH:MM AM/PM" format:')
+                a = input('Please give the alarm time in "HH:MM " format:')
                 say('Okay Boss setting an alarm')
-                alarm(a)
-                exec(open('alarm.py').read())
+                from alarm import ring
+                ring(a)
             elif 'Ishan' in query:
                 say('Ishan is the one who made me')  
             elif 'Shivam' in query:
