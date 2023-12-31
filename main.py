@@ -1,3 +1,5 @@
+import os
+
 import pywhatkit
 import webbrowser
 import win32com.client
@@ -95,7 +97,7 @@ while True:
     say('Listening')
     print('Listening')
     query = take_command().lower()
-    if 'wake up' in query:
+    if 'jarvis' in query:
         Greet_Me()
         while True:
             say('Listening')
@@ -104,6 +106,12 @@ while True:
             if 'the time'.lower() in query:
                 Time = datetime.datetime.now().strftime('%H:%M:%S')
                 say(f'Boss,the time is {Time}')
+            elif 'shutdown the system' in query:
+                say('Boss Are You sure You want to shutdown this computer?Reply with a yes and no')
+                shutdown = take_command()
+                if 'y' in shutdown:
+                    os.system('shutdown /s /t 1')
+
             elif 'introduce yourself'.lower() in query:
                 say('I am a virtual voice assistant developed by Mr Shivam Jha and Mr Ishan Tekwari from 10 december 2023 uptill 2024,My Name stands for Just A RATHER VERY INTELLIGENT SYSTEM,I can help you with almost anything,I can help you with your school work,I can even quiz you,I am capable of face and object recognition,I can tell you the news,predict the weather and do almost everything models like Siri or Chat Gpt can do')
             elif 'go offline' in query or 'shut off' in query or 'shutdown' in query or 'shut down' in query:
@@ -200,11 +208,9 @@ while True:
                 say('You are welcome ,Boss')
             elif 'open' in query:
                 from Dictapp import openappweb
-
                 openappweb(query)
             elif 'close' in query:
                 from Dictapp import closeappweb
-
                 closeappweb(query)
             elif 'Google'.lower() in query:
                 Search_Google(query)
