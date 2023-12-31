@@ -1,5 +1,4 @@
 import os
-
 import pywhatkit
 import webbrowser
 import win32com.client
@@ -10,8 +9,6 @@ import pyautogui
 from keyboard import volumeup, volumedown
 import random
 from time import sleep
-
-
 def say(script):
     """This function says out loud whatever string is given to it"""
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
@@ -33,7 +30,21 @@ def take_command():
         except Exception as e:
             return 'Boss I am Sorry Some error occurred I could not understand or hear you'
 
-
+password = 'jarvis approval'
+lives = 5
+for i in range(5):
+    say('To Start say the Password')
+    user_input = take_command()
+    if password in user_input:
+        say('That is the right password,welcome boss')
+        break
+    else:
+        say('That is the wrong password')
+        lives -= 1
+        say(f'You have {lives} lives left')
+if lives <= 0:
+    say('You entered the password wrong to many times,Jarvis is turning off')
+    exit()
 def Greet_Me():
     '''This function greets the user'''
     hour = int(datetime.datetime.now().hour)
@@ -190,7 +201,7 @@ while True:
                         sleep(108)
                     elif b == 7:
                         webbrowser.open('https://www.youtube.com/watch?v=fWRPihlt2ho')
-                        sleep(123)
+                        sleep(90.7)
                     elif b == 8:
                         webbrowser.open('https://www.youtube.com/watch?v=MENcEyD0B7w')
                         sleep(177)

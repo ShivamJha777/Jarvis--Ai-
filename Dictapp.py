@@ -1,6 +1,22 @@
 import os
 import pyautogui
 import webbrowser
+import speech_recognition as sr
+def take_command():
+    '''This function takes voice input from the user'''
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        r.pause_threshold = 0.7
+        r.energy_threshold = 500
+        audio = r.listen(source)
+        try:
+            say('Recognizing')
+            query = r.recognize_google(audio, language='en-in')
+            print(f'User said: {query}\n')
+            return query.lower()
+        except Exception as e:
+            return 'Boss I am Sorry Some error occurred I could not understand or hear you'
+
 import win32com.client
 from time import sleep
 did_Find_App = False
@@ -8,7 +24,6 @@ def say(script):
     '''This function says out loud whatever string is given to it'''
     speaker = win32com.client.Dispatch('SAPI.SpVoice')
     return speaker.Speak(script)
-dictapp = {'commandprompt':'cmd','paint':'Paint','word':'winword',"excel":'excel',"chrome":'chrome','vscode':'code','powerpoint':'powerpnt','brave':'brave','pycharm':'PyCharm','whatsapp':'WhatsApp','webstorm':'webstorm'}
 def openappweb(query):
     if '.com' in query or 'co.in'in query or '.org' in query:
         query = query.replace('open','')
@@ -18,67 +33,36 @@ def openappweb(query):
         say(f'Launching {query},Boss')
         webbrowser.open(f'https://www.{query}')
     else:
-        keys = list(dictapp.keys())
-        did_Find_App = False
-        for app in keys:
-            if app in query:
-                did_Find_App = True
-                say(f'Launching {app} Boss')
-                os.system(f'start {dictapp[app]}')
-        if did_Find_App == False:
-            say(f'Sorry Boss I could not open the app')
+        query = query.replace('open','')
+        query = query.replace('jarvis','')
+        pyautogui.press('super')
+        pyautogui.typewrite(query)
+        pyautogui.press('enter')
 def closeappweb(query):
-    say('Closing,Sir')
-    if 'one tab' in query or '1 tab' in query:
-        pyautogui.hotkey('ctrl','w')
-        say('All tabs closed boss')
-    elif 'two tab' in query or '2 tab' in query:
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        say('All tabs closed,Boss')
-    elif 'three tab' in query or '3 tab' in query:
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        say('All tabs closed,Boss')
-    elif 'four tab' in query or '4 tab' in query:
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        say('All tabs closed,Boss')
-    elif 'five tab' in query or '5 tab' in query:
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        say('All tabs closed,Boss')
-    elif 'six tab' in query or '5 tab' in query:
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        sleep(0.5)
-        pyautogui.hotkey('ctrl', 'w')
-        say('All tabs closed,Boss')
+    if 'tab' in query:
+        say('Boss How many tabs would you like to close?Please only say the number of tabs')
+        try:
+            tab = int(take_command())
+            tab += 1
+            for i in range(tab):
+                pyautogui.hotkey('ctrl','w')
+        except:
+            say('Sorry Boss Some error occurred you will have to manually enter the number of tabs to be closed')
+            tab = int(input('Enter the number of tabs you want to close:'))
+            tab += 1
+            sleep(4)
+            num = 0
+            while num != tab:
+                pyautogui.hotkey('ctrl', 'w')
+                num += 1
+        say('All Tabs Closed Boss')
     else:
-        keys = list(dictapp.keys())
-        for app in keys:
-            if app in query:
-                os.system(f'taskkill /f /in {dictapp[app]}.exe')
+        query = query.replace('jarvis','')
+        query = query.replace('close','')
+        query = query.replace('please','')
+        query = query.replace('i','')
+        query = query.replace('for me','')
+        query = query.replace('can you','')
+        query = query.replace('want you to','')
+        os.system(f'taskkill /f /im {query}.exe')
+
