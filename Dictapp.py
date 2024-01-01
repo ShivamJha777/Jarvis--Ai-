@@ -2,6 +2,7 @@ import os
 import pyautogui
 import webbrowser
 import speech_recognition as sr
+from time import sleep
 def take_command():
     '''This function takes voice input from the user'''
     r = sr.Recognizer()
@@ -32,6 +33,23 @@ def openappweb(query):
         query = query.replace(' ','')
         say(f'Launching {query},Boss')
         webbrowser.open(f'https://www.{query}')
+    elif 'tab' in query:
+        say('Boss How many tabs would you like to open?Please only say the number of tabs')
+        try:
+            tab = int(take_command())
+            tab += 1
+            for i in range(tab):
+                pyautogui.hotkey('ctrl', 'w')
+        except:
+            say('Sorry Boss Some error occurred you will have to manually enter the number of tabs to be closed')
+            tab = int(input('Enter the number of tabs you want to open:'))
+            tab += 1
+            sleep(4)
+            num = 0
+            while num != tab:
+                pyautogui.hotkey('ctrl', 't')
+                num += 1
+        say('All Tabs Opened  Boss')
     else:
         query = query.replace('open','')
         query = query.replace('jarvis','')
@@ -65,4 +83,8 @@ def closeappweb(query):
         query = query.replace('can you','')
         query = query.replace('want you to','')
         os.system(f'taskkill /f /im {query}.exe')
-
+def testing(query):
+    sleep(3)
+    pyautogui.typewrite('14:45')
+    pyautogui.hotkey('ctrl','c')
+testing('')

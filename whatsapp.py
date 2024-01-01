@@ -26,7 +26,6 @@ update = int((datetime.now() + timedelta(minutes = 2)).strftime('%M'))
 strTime = int(datetime.now().strftime('%H'))
 def sendMessage():
     say('Who do you want to message Boss?')
-    say('To message Sonu say 1 to Message Harsh say 2 to Message Shreyan say 3 to Message Kutta say 4')
     a = int(input())
     if a == 1:
         say('What is the message?Only say the message whatever you say next will be sent.')
