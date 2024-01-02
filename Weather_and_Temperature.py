@@ -10,7 +10,6 @@ def find_weather(city):
     print(city)
     url = 'https://wttr.in/{}'.format(city)
     # Getting the Weather Data of the City
-    say('')
     res = requests.get(url)
     # Printing the results!
     print(res.text)

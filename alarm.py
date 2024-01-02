@@ -14,16 +14,11 @@ def ring(alarm_time):
     while True:
         now = datetime.datetime.now()
         current_hour = now.strftime("%H")
-        print(current_hour)
         current_min = now.strftime("%M")
-        print(current_min)
-        current_second = now.strftime("%S")
-        print(current_second)
-        sleep(5)
         if alarm_hour == current_hour:
             if alarm_min == current_min:
                     say('Boss,The alarm is ringing')
                     os.startfile('carol_of_the_bells-alarm.wav')
                     sleep(30)
                     break
-ring('05:47')
+ring('21:38')

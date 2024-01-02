@@ -112,7 +112,7 @@ while True:
             Time = datetime.datetime.now().strftime('%H:%M:%S')
             say(f'Boss,the time is {Time}')
         elif 'shutdown the system' in query:
-            say('Boss Are You sure You want to shutdown this computer?Reply with a yes and no')
+            say('Boss Are You sure You want to shutdown this computer?Reply with a yes  no')
             shutdown = take_command()
             if 'y' in shutdown:
                 os.system('shutdown /s /t 1')
@@ -156,6 +156,9 @@ while True:
             print(f'The download speed is {download} mb/s')
             say(f'Boss The upload speed is {upload} megabytes per second')
             say(f'and The download speed is {download} megabytes per second')
+        elif 'switch window' in query:
+            say('Okay Boss Switching the window')
+            pyautogui.hotkey('alt','tab')
         elif 'joke' in query:
             say('Boss would like one joke or ten?')
             jokes_told = take_command()

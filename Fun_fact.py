@@ -3,7 +3,7 @@ import json
 import requests
 
 
-def get_fun_fact(_):
+def get_fun_fact(za_hell):
     url = "https://uselessfacts.jsph.pl/random.json?language=en"
 
 
@@ -13,4 +13,3 @@ def get_fun_fact(_):
 
     useless_fact = data['text']
     return useless_fact
-get_fun_fact('')

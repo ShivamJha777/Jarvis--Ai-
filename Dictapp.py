@@ -62,18 +62,26 @@ def closeappweb(query):
         try:
             tab = int(take_command())
             tab += 1
+            say('Boss Please switch to your browser window so I can add the tabs')
+            sleep(3)
             for i in range(tab):
                 pyautogui.hotkey('ctrl','w')
         except:
             say('Sorry Boss Some error occurred you will have to manually enter the number of tabs to be closed')
             tab = int(input('Enter the number of tabs you want to close:'))
             tab += 1
-            sleep(4)
+            say('Boss PLease switch to the browser window so I can close the tabs')
             num = 0
+            sleep(4)
             while num != tab:
                 pyautogui.hotkey('ctrl', 'w')
                 num += 1
         say('All Tabs Closed Boss')
+    elif 'window' in query:
+        say('Okay Boss Please switch to the window you would like to close')
+        sleep(2)
+        say('Closing The current open window')
+        pyautogui.hotkey('alt','f4')
     else:
         query = query.replace('jarvis','')
         query = query.replace('close','')
@@ -83,8 +91,3 @@ def closeappweb(query):
         query = query.replace('can you','')
         query = query.replace('want you to','')
         os.system(f'taskkill /f /im {query}.exe')
-def testing(query):
-    sleep(3)
-    pyautogui.typewrite('14:45')
-    pyautogui.hotkey('ctrl','c')
-testing('')
