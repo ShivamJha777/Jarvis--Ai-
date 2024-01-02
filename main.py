@@ -112,7 +112,7 @@ while True:
             Time = datetime.datetime.now().strftime('%H:%M:%S')
             say(f'Boss,the time is {Time}')
         elif 'shutdown the system' in query:
-            say('Boss Are You sure You want to shutdown this computer?Reply with a yes  no')
+            say('Boss Are You sure You want to shutdown this computer?Reply with a yes or no')
             shutdown = take_command()
             if 'y' in shutdown:
                 os.system('shutdown /s /t 1')
@@ -129,7 +129,7 @@ while True:
                         print(fun_fact)
                     except:
                         say('Boss due to presence of quotes in the fun fact.I cannot say it out loud,thus I am going to print the fun facts')
-                        print('fun fact')
+                        print(fun_fact)
             except:
                 say('Boss due to some errors you will have to manually type down the number of fun facts you would like to read')
                 no_of_facts = int(input('Enter the number of jokes,You would like to hear:'))
@@ -220,10 +220,6 @@ while True:
                 volumedown(decrease_percentage)
             except:
                 say('Sorry Boss,Some error occurred please try again')
-        elif 'whatsapp' in query:
-            from whatsapp import sendMessage
-
-            sendMessage()
         elif 'I am fine'.lower() in query:
             say('That is great Boss')
         elif 'tired' in query:
@@ -336,5 +332,9 @@ while True:
             say('Ishan is the one of my creator')
         elif 'Shivam' in query:
             say('He is one of my creator')
+        elif 'whatsapp' in query:
+            from whatsapp import sendMessage
+
+            sendMessage()
         elif 'Hello'.lower() or 'how are you'.lower() in query:
             say('Sorry Boss,I could not understand what you just said')
