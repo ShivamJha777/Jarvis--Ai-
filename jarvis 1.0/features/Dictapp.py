@@ -39,7 +39,7 @@ def openappweb(query):
             tab = int(take_command())
             tab += 1
             for i in range(tab):
-                pyautogui.hotkey('ctrl', 'w')
+                pyautogui.hotkey('ctrl', 't')
         except:
             say('Sorry Boss Some error occurred you will have to manually enter the number of tabs to be closed')
             tab = int(input('Enter the number of tabs you want to open:'))
