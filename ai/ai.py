@@ -1,1 +1,0 @@
-response_list = ['hi','hello','bye','i am back',"i didn't ask that"]

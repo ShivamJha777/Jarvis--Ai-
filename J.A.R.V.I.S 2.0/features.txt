@@ -1,5 +1,0 @@
-Features in Jarvis 2.0:
-1. Pdf to notes
-2.face recognition(face lock)
-3. password generation
-4.Normal conversation
