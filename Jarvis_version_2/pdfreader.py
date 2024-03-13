@@ -1,16 +1,10 @@
 import PyPDF2
-import os
-def pdfreader(path,start_file = True):
-        if start_file:
-            os.startfile(path)
-        book = open(path,'rb')
-        pdf = PyPDF2.PdfFileReader(book)
-        pages = pdf.getNumPages()
-        print("Number of pages:",pages)
-        a = ''
-        for i in range(pages):
-                page = pdf.pages[i]
-                content = page.extract_text()
-                a += str(content)
-        book.close()
-        return a
+reader = PyPDF2.PdfReader('Atomic habits ( PDFDrive ).pdf')
+def pdfreader(start_page,limit = len(reader.pages)):
+        start_page = start_page - 1
+        reader = PyPDF2.PdfReader('Atomic habits ( PDFDrive ).pdf')
+        print(len(reader.pages))
+        text = ''
+        for i in range(start_page,limit):
+                text += reader.pages[i].extract_text()
+        return text

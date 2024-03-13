@@ -17,4 +17,3 @@ def news(no_of_news):
         print(formatted_news_title)
         total_news += f'{formatted_news_title}\n'
     return total_news
-news(20)

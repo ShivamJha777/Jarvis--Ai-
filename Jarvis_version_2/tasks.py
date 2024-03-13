@@ -5,6 +5,7 @@ import webbrowser
 import pyautogui
 import pywhatkit
 import pyjokes
+
 from nltk.corpus import wordnet
 import datetime
 from Jarvis_version_2.pdfreader import pdfreader
@@ -54,6 +55,38 @@ def task_completeion():
                 speak(result)
             except:
                 speak('Sorry Boss there is no speakable output available')
+        elif 'disney' in query:
+            query = query.replace('jarvis','')
+            query = query.replace('play','')
+            query = query.replace('start','')
+            query = query.replace('on disney','')
+            query = query.replace('hotstar','')
+            query = query.replace('plus','')
+            query = query.replace('+', '')
+            webbrowser.open('https://www.hotstar.com/in/explore')
+            time.sleep(3)
+            pyautogui.moveTo(683, 554)
+            time.sleep(2)
+            pyautogui.click()
+            time.sleep(8.5)
+            pyautogui.write(query)
+            time.sleep(2)
+            pyautogui.press('enter')
+            time.sleep(0.9)
+            pyautogui.moveTo((296, 657))
+            time.sleep(2.1)
+            pyautogui.click()
+            time.sleep(0.5)
+            pyautogui.moveTo(456, 948)
+            time.sleep(0.45)
+            pyautogui.click()
+            keep_continuing = True
+            while keep_continuing:
+                time.sleep(10)
+                a = takeCommand()
+                if 'wake up' in a:
+                    keep_continuing = False
+                    greet()
         elif 'play' in query:
             query = query.replace('jarvis','')
             query = query.replace('play','')
@@ -96,6 +129,12 @@ def task_completeion():
             time.sleep(0.2)
             speak('Message sent successfully')
             pyautogui.hotkey('alt','f4')
+        elif 'horoscope' in query:
+            speak('Boss The speech recognition system is terrible thus itwould be better if you enter your sign')
+            sign = input('Enter Your zodiac sign:').lower()
+            from horoscope import get_horoscope
+            result = get_horoscope(sign)
+            speak(f'Your horoscope says: {result}')
         elif 'screenshot' in query:
             pywhatkit.take_screenshot('screenshot')
             speak('Screenshot taken')
@@ -120,11 +159,20 @@ def task_completeion():
             pyautogui.hotkey('alt','f4')
             speak('Done boss')
         elif 'pdf' in query or 'read' in query:
-            speak('Sure Boss Can you please enter the pdf path?')
+            speak('Sure Boss Can you please enter the pdf path and start page?')
             file = input('Enter file path:')
-            a = pdfreader(file,start_file=False)
+            start = int(input('Enter Start page:'))
+            a = pdfreader(file,start,start_file=False)
             speak('Since there is too much data thus  I think I should print it')
             print(a)
+        elif 'sleep' in query:
+            keep_continuing = True
+            while keep_continuing:
+                time.sleep(10)
+                a = takeCommand()
+                if 'wake up' in a:
+                    keep_continuing = False
+                    greet()
         elif 'location' in query or 'where am i' in query:
             speak('Collecting required data')
             a = get_location()
@@ -205,6 +253,28 @@ def task_completeion():
             query = query.replace('jarvis', '')
             result = wikipedia.summary(query, 2)
             speak(f'According to Wikipedia.....{result}')
+        elif 'news' in query:
+            speak('Sure Boss How many News would you like?')
+            news_no = int(input('Enter the number of news you would like to hear about:'))
+            from news_api import news
+            total_news = news(news_no)
+            print(total_news)
+            speak(total_news)
+        elif 'quote' in query:
+            from random_qoute import random_qoute
+            if 'regarding' not in query and 'about' not in query:
+                a = random_qoute('')
+                speak(a)
+            else:
+                query = query.replace('jarvis','')
+                query = query.replace('tell me a','')
+                query = query.replace('lets hear a','')
+                query = query.replace('quote','')
+                query = query.replace('about','')
+                query = query.replace('regarding','')
+                query = query.replace(' ','')
+                nigga = random_qoute(query)
+                speak(nigga)
         elif 'meaning' in query:
             query = query.replace('jarvis','')
             query = query.replace('meaning', '')

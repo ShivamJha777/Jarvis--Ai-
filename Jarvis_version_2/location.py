@@ -12,4 +12,3 @@ def get_location():
     a = f'City you are in is {city}\nCountry is {country}\nip address is {ip_address}\nregion is {region}\Organization is {org}\nTimezone is {timezone}\n and postal code is {postal_code}'
     print(a)
     return a
-get_location()

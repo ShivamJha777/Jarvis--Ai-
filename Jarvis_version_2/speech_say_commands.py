@@ -14,7 +14,6 @@ def takeCommand():
     command = sr.Recognizer()
     with sr.Microphone() as source:
         print('Listening...',end='',flush=True)
-        speak('Listening')
         command.dynamic_energy_threshold = True
         command.adjust_for_ambient_noise(source)
         audio = command.listen(source)
@@ -25,6 +24,5 @@ def takeCommand():
             print(f'User said: {query}')
             return query.lower()
         except:
-            speak('Could not understand audio,redoing operation')
+            print('Could not understand audio,redoing operation')
             takeCommand()
-
