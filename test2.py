@@ -19,14 +19,3 @@ def synonym(word):
         speak(f'The synonym of {word} are {list_of_s}')
     except:
         speak('Sorry Boss some error occurred')
-from nltk.corpus import wordnet
-syns = wordnet.synsets("penultimate")
-print("Defination of the said word:")
-print(syns[0].definition())
-print("\nExamples of the word in use::")
-a = syns[0].examples()
-try:
-    example = a[0]
-    print(example)
-except:
-    print("No examples found")

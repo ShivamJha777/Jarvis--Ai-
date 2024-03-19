@@ -1,8 +1,7 @@
 import PyPDF2
-reader = PyPDF2.PdfReader('Atomic habits ( PDFDrive ).pdf')
-def pdfreader(start_page,limit = len(reader.pages)):
+def pdfreader(pdf_name,start_page,limit):
         start_page = start_page - 1
-        reader = PyPDF2.PdfReader('Atomic habits ( PDFDrive ).pdf')
+        reader = PyPDF2.PdfReader(f'{pdf_name}.pdf')
         print(len(reader.pages))
         text = ''
         for i in range(start_page,limit):

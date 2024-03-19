@@ -26,23 +26,7 @@ def task_completeion():
     while True:
         #query = input("What would you like to do? ").lower()
         query = takeCommand()
-        if 'youtube' in query and 'play' not in query:
-            query = query.replace('jarvis', '')
-            query = query.replace('for', '')
-            query = query.replace('in youtube', '')
-            query = query.replace('search','')
-            try:
-                web = 'https://www.youtube.com/results?search_query=' + query
-                webbrowser.open(web)
-                speak('Boss this is what I found on youtube do want me to open the video which I think is the most relative to the topic?')
-                choice = takeCommand().lower()
-                if 'y' in choice or 'sure' in choice or 'why not' in choice or 'would love to' in choice:
-                    speak('Ok Boss Give me a few seconds I will play the video most relevant to the topic')
-                    pywhatkit.playonyt(query)
-                speak('Done Boss')
-            except:
-                speak('Sorry Boss .Some error occurred I was not able to complete your request')
-        elif 'google' in query:
+        if 'google' in query:
             query = query.replace('jarvis', '')
             query = query.replace('search', '')
             query = query.replace('for', '')
@@ -78,7 +62,7 @@ def task_completeion():
             pyautogui.click()
             time.sleep(0.5)
             pyautogui.moveTo(456, 948)
-            time.sleep(0.45)
+            time.sleep(1)
             pyautogui.click()
             keep_continuing = True
             while keep_continuing:
@@ -101,7 +85,23 @@ def task_completeion():
                 pywhatkit.playonyt(query)
             except:
                 speak('Sorry Boss,Some error occurred')
-        elif 'whatsapp' in query:
+        elif 'homework mode' in query:
+            speak('Turning on homework mode.Please include your homework pdf in the folder of this program and then enter its name.')
+            name = input('Enter pdf name:')
+            speak('Now please enter the start and end page')
+            start = int(input('Enter start page:'))
+            end = int(input('Ending page:'))
+            speak('Homework mode initiated.')
+            from rag_agent import agent
+            while True:
+                speak('What is your request?')
+                request = takeCommand()
+                if 'quit' in request:
+                    break
+                response = agent(pdf_name=name,start_page=start,end_page=end,question=request)
+                response = response.replace('#','')
+                speak(response)
+        elif 'whatsapp' in query and 'close' not in query:
             query = query.replace('jarvis','')
             query = query.replace('whatsapp','')
             query = query.replace('send a','')
@@ -130,8 +130,13 @@ def task_completeion():
             speak('Message sent successfully')
             pyautogui.hotkey('alt','f4')
         elif 'horoscope' in query:
-            speak('Boss The speech recognition system is terrible thus itwould be better if you enter your sign')
-            sign = input('Enter Your zodiac sign:').lower()
+            speak("Sure boss which sign's horoscope would you like?")
+            sign = takeCommand()
+            sign = sign.replace('i would like','')
+            sign = sign.replace('jarvis','')
+            sign.replace('a','')
+            sign = sign.replace('horoscope of','')
+            sign = sign.replace(' ','')
             from horoscope import get_horoscope
             result = get_horoscope(sign)
             speak(f'Your horoscope says: {result}')
@@ -155,22 +160,37 @@ def task_completeion():
             time.sleep(0.2)
             pyautogui.press('enter')
             speak('Please wait for a few seconds dont switch the window')
-            time.sleep(7)
+            time.sleep(4)
             pyautogui.hotkey('alt','f4')
             speak('Done boss')
         elif 'pdf' in query or 'read' in query:
             speak('Sure Boss Can you please enter the pdf path and start page?')
-            file = input('Enter file path:')
+            name = input('Enter pdf name pls(ignore the.pdf extension):')
             start = int(input('Enter Start page:'))
-            a = pdfreader(file,start,start_file=False)
+            end = int(input('Enter end page:'))
+            a = pdfreader(pdf_name=name,start_page=start,limit=end)
             speak('Since there is too much data thus  I think I should print it')
             print(a)
+        elif 'wallpaper' in query:
+            speak('Changing Wallpaper...')
+            from wallpaper_changer import wallpaper_changer
+            wallpaper_changer(r"C:\Users\Dell\Pictures\wallpaper_folder")
+        elif 'notes' in query:
+            speak('Sure Boss.Please enter the required parameters for generating the notes')
+            pdf = input('Enter pdf name(Include it in the folder of this program and ignore the.pdf extension)')
+            start = int(input('Enter start page:'))
+            end_num = int(input('Enter the ending page:'))
+            words = input('How many words per point would you like?:')
+            from notes_generator import pdf_notes
+            speak('Please wait a few seconds.Generating notes....')
+            pdf_notes(pdf_name=pdf,start_page=start,end_page=end_num,word_per_point=words)
+            speak('Notes have been typed in the word document save it where you like.')
         elif 'sleep' in query:
             keep_continuing = True
             while keep_continuing:
                 time.sleep(10)
                 a = takeCommand()
-                if 'wake up' in a:
+                if 'jarvis' in a or 'wake up':
                     keep_continuing = False
                     greet()
         elif 'location' in query or 'where am i' in query:
@@ -198,21 +218,47 @@ def task_completeion():
                 speak('Done boss')
             else:
                 speak('Come on Boss, use icognito mode ,man,anyways I will delete it')
-                pyautogui.keyDown('ctrl')
-                time.sleep(0.8)
-                pyautogui.keyDown('shift')
-                time.sleep(0.9)
-                pyautogui.press('delete')
-                time.sleep(1)
-                pyautogui.keyUp('ctrl')
-                time.sleep(0.9)
-                pyautogui.keyUp('shift')
-                time.sleep(0.8)
+                pyautogui.press('super')
+                time.sleep(0.4)
+                pyautogui.write('brave')
+                time.sleep(0.4)
                 pyautogui.press('enter')
-                speak('done boss , but, use icognito from next time onwards')
+                time.sleep(3)
+                pyautogui.hotkey('ctrl','t')
+                pyautogui.click(x=1883, y=90)
+                time.sleep(1)
+                pyautogui.click(x=1498, y=796)
+                time.sleep(1.5)
+                pyautogui.click(x=366, y=522)
+                time.sleep(0.9)
+                pyautogui.click(x=754, y=904)
+                time.sleep(0.6)
+                pyautogui.click(x=1253, y=908)
+                time.sleep(0.9987356)
+                pyautogui.hotkey('alt','f4')
+                speak('done boss , but,use icognito from next time onwards')
         elif 'joke' in query:
             speak('Sure boss,one Joke coming right up')
             speak(pyjokes.get_joke())
+        elif 'open' in query:
+            if '.com' in query or '.in' in query or '.org' in query:
+                query = query.replace('open', '')
+                query = query.replace('jarvis', '')
+                query = query.replace('launch', '')
+                query = query.replace(' ', '')
+                speak(f'Launching {query},Boss')
+                webbrowser.open(f'https://www.{query}')
+            else:
+                query = query.replace('open', '')
+                query = query.replace('jarvis', '')
+                query = query.replace('launch', '')
+                query = query.replace(' ', '')
+                speak(f'Ok Boss,Launching {query}')
+                pyautogui.press('super')
+                time.sleep(0.3)
+                pyautogui.write(query)
+                time.sleep(0.8)
+                pyautogui.press('enter')
         elif 'temperature' in query:
             default_city = 'Kolkata'
             if 'in' in query:
@@ -258,7 +304,6 @@ def task_completeion():
             news_no = int(input('Enter the number of news you would like to hear about:'))
             from news_api import news
             total_news = news(news_no)
-            print(total_news)
             speak(total_news)
         elif 'quote' in query:
             from random_qoute import random_qoute
